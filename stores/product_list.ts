@@ -42,15 +42,22 @@ export const useProductListStore = defineStore('productList', () => {
   const getList = async (params: ProductListQuery) => {
     if (params.productCategoryId || params.keyword) {
       const { data } = await useAsyncData('products', () =>
-        $fetch('https://apifoxmock.com/m2/4820049-0-default/193668746', {
-          method: 'GET',
+        // $fetch('https://apifoxmock.com/m2/4820049-0-default/193668746', {
+        //   method: 'GET',
+        //   params: {
+        //     ...params,
+        //     pageNo: pageNo.value,
+        //     pageSize: pageSize.value,
+        //   },
+        // })
+        $fetch('/ins/search', {
+          method: 'POST',
           params: {
-            ...params,
-            pageNo: pageNo.value,
-            pageSize: pageSize.value,
+            url:'https://www.instagram.com/reel/C-m7ud1prxg/?igsh=MW16aTRvd2F4eHlyZg=='
           },
-        })
+        })   
       );
+      console.log("data",data)
 
       list.value = (data.value?.data?.list || []).map((item) => {
         const imagePath = getRandomImage(); // 获取随机图片路径

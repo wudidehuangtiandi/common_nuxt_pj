@@ -30,17 +30,18 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    //仅在客户端渲染时生效，需要serve false
     devProxy: {
-      '/shop': {
-        target: 'http://47.89.254.121:8002/shop', // 线上代理地址
+      '/ins': {
+        target: 'http://127.0.0.1:8888/ins', // 线上代理地址
         // target: process.env.BASE_URL || 'http://39.108.227.113:8002/shop', // 目标接口域名
         changeOrigin: true, // 表示是否跨域
       },
     },
-    // 该配置用于服务端请求转发
+    // 该配置用于服务端请求转发,注意 nuxt3.2之后听说不生效，那就要写全路径 或者 只用proxy插件
     routeRules: {
-      '/shop/**': {
-        proxy: 'http://47.89.254.121:8002/shop/**',
+      '/ins/**': {
+        proxy: 'http://127.0.0.1:8888/ins/**',
         // proxy: process.env.BASE_URL || 'http://39.108.227.113:8002/shop/**'
       },
     },
